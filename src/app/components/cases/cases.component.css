@@ -1,0 +1,18 @@
+
+mat-grid-tile {
+    background: lightblue;
+  }
+
+h2{
+  text-align: center;
+}
+
+.card{
+  padding: 10px;
+}
+
+.tab{
+  tab-size: 5;
+}
+
+

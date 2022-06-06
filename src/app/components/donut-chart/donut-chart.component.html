@@ -1,0 +1,10 @@
+<div>
+  <h3>Your Overall Progress </h3>
+  <div >
+    <div style="display: block" >
+      <canvas  baseChart [style.height.px]="height" [style.width.px]="width" (window:resize)="onResize($event)" *ngIf="mychart"  id="canvas">
+      </canvas>
+    </div>
+  </div>
+</div>
+

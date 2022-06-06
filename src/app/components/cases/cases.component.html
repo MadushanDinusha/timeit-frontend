@@ -1,0 +1,99 @@
+
+<br>
+<div class="container">
+  <div class="row">
+    <div class="col-sm-5">
+      <mat-card>
+
+      <div class="card">
+        <h2>What are your numbers</h2>
+       <div class="row">
+         <div class="col align-self-center">
+            <form [formGroup]="registerForm"  class="form-horizontal" (ngSubmit)="doSubmit()">
+              <div class="form-group">
+                <label class="control-label col-sm-6" for="usr">Numbers of 1. priorities :</label>
+                <div class="col-sm-3">
+                  <input formControlName="fPriorityNum"  type="number" class="form-control input" name="fPriorityNum" required>
+                </div>
+                <label class="control-label col-sm-6" for="usr">Too old 1. priorities :</label>
+                <div class="col-sm-3">
+                  <input type="number" formControlName="fPriorityOldNum"  class="form-control input" name="fPriorityOldNum" required>
+                </div>  
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-6" for="usr">Numbers of 2. priorities :</label>
+                <div class="col-sm-3">
+                  <input type="number" formControlName="sPriorityNum"  class="form-control input" name="sPriorityNum" required>
+                </div>
+                <label class="control-label col-sm-6" for="usr">Too old 2. priorities :</label>
+                <div class="col-sm-3">
+                  <input type="number" formControlName="sPriorityOldNum"  class="form-control input" name="sPriorityOldNum">
+                </div>
+              </div>
+              <div class="form-group" style="margin-left: 30%;">
+                <div class="form-group">
+                  <mat-form-field class="example-full-width">
+                    <mat-label>Select Date</mat-label>
+                    <input matInput id="oldestDate" [matDatepicker]="picker" [matDatepickerFilter]="myFilter" formControlName="oldestDate" name="oldestDate" >
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
+                </div>
+                </div>
+              <button mat-raised-button [disabled]="!registerForm.valid" color="primary" type="submit">Submit</button>
+            
+          </form>
+          
+          
+        </div>
+       </div>
+      </div>
+    </mat-card>
+
+    </div>
+
+    <div class="col-sm-3">
+     <div class="card">
+       <mat-card>
+        <p>Lastest resgestration : {{latestReg |date: 'yy-MM-dd'}}  <p>
+          <div></div>
+        <p class="tab">Number of 1. priorities :  {{priority1}}</p> 
+        <p  class="tab">Number of too old 1. priorities : {{opriority1}}</p>
+        <br>
+        <p  class="tab">Number of 2. priorities :  {{priority2}}</p> 
+        <p  class="tab">Number of too old 2. priorities :  {{opriority2}}</p>
+        <br>
+      <p>Date of Oldest date : {{oldReg |date: 'yy-MM-dd'}}</p>
+       </mat-card>
+      
+
+     </div>
+     
+    </div>
+    <div class="col-sm-4">
+     <div class="card">
+       <mat-card>
+        <h2>Status of your recent SLA:</h2>
+        <app-progress-bar [sla]="latestSla"></app-progress-bar>  
+  
+       </mat-card>
+      
+     </div>
+
+    </div>
+  </div>
+ 
+  <div style="width:100%;">
+    <mat-card>
+      <canvas
+      baseChart
+      [data]="salesData"
+      [type]="'line'"
+      [options]="chartOptions"
+   >
+   </canvas>
+    </mat-card>
+    
+ </div>
+</div>
+ 

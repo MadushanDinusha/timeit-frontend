@@ -1,0 +1,16 @@
+mat-grid-tile {
+    background: rgb(242, 240, 240);
+    width: 1500px;
+  }
+
+  .example-card {
+    min-width: 400px;
+    max-width: 400px;
+  }
+
+  .example-card{
+      text-align: center;
+  }
+  p{
+    font-size: medium;
+  }

@@ -1,0 +1,21 @@
+<h3>Requested by: {{username}}</h3>
+<table class="table">
+  <thead>
+    <tr>
+    
+      <th scope="col">From</th>
+      <th scope="col">To</th>
+      <th scope="col">Comment</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr  *ngFor="let d of data" style="text-align: center">
+    
+      <td> {{d.fromDate| date: 'yyyy-MM-dd' }}</td>
+      <td> {{d.toDate| date: 'yyyy-MM-dd' }}</td>
+      <td >{{d.comment}}</td>
+  </tr>
+  <td><button [mat-dialog-close]="true" (click)="doSubmit('approved')">Approve</button><button [mat-dialog-close]="true" (click)="doSubmit('rejected')">Reject</button></td>
+
+  </tbody>
+</table>    

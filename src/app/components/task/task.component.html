@@ -1,0 +1,55 @@
+<h1 style="text-align: center;">Your All tasks</h1>
+<mat-form-field appearance="standard">
+  <mat-label>Filter</mat-label>
+  <input matInput (keyup)="applyFilter($event)" placeholder="Ex. BBØ" #input>
+</mat-form-field>
+<mat-card class="result">
+  <mat-card-content>
+
+    <mat-slide-toggle [(ngModel)]="isChecked" (click)="getActiveData()">{{isChecked ? 'Showing All Tasks' : 'Showing Active Tasks'}}</mat-slide-toggle>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource" matSort>
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+      <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+    </ng-container>
+
+    <!-- Progress Column -->
+    <ng-container matColumnDef="type">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Type </th>
+      <td mat-cell *matCellDef="let row"> {{row.type}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="fromDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> From Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.fromDate | date: 'yyyy-MM-dd HH:mm'}}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="toDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> To Date </th>
+      <td mat-cell *matCellDef="let row"> {{row.toDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="active">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> Active </th>
+      <td mat-cell *matCellDef="let row"> {{row.active ? '&#10003;' : '&#10005;'}}</td>
+    </ng-container>
+    
+    <ng-container matColumnDef="done">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+      <td mat-cell *matCellDef="let row" > <button *ngIf="row.active" (click)="doDone(row.id)">Done</button></td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+
+    <!-- Row shown when there is no matching data. -->
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+    </tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+</div>

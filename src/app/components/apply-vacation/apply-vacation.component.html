@@ -1,0 +1,93 @@
+<div class="card" style="min-width: 200px; padding-top: 20%;">
+    
+  <mat-dialog-content class="mat-typography">
+    <h1 style="text-align: center;">Please select Vacation Days</h1>
+    <div class="col-md-8 mx-auto" style="margin-left: 20%;">
+    <form [formGroup]="registerForm" (ngSubmit)="save()" >
+      <div class="form-group" style="padding: 10%;">
+        <div class="container" style="width: 250px;">
+        
+        <div class="form-group">
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <mat-label>From</mat-label>
+              <input matInput id="fromDate" type="date"  formControlName="fromDate" name="fromDate" >
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <mat-label>To</mat-label>
+              <input matInput id="toDate" type="date" formControlName="toDate" name="toDate" >
+            </mat-form-field>
+          </div>
+          <div class="form-group">
+            <mat-form-field class="example-full-width">
+              <mat-label>Comment</mat-label>
+              <input matInput id="comment" type="comment" formControlName="comment" name="comment" >
+            </mat-form-field>
+          </div>
+          
+        </div>
+        
+        
+        <div class="button-row">
+          <button [disabled]="!registerForm.valid" mat-raised-button [mat-dialog-close]="true" color="primary" type="submit">Submit</button>
+          <button mat-raised-button color="warn" type="reset">Clear</button>
+          <button mat-button mat-dialog-close>Cancel</button>
+        </div>
+      </div>
+      </div>
+    
+    </form>
+    <div *ngIf="isRole" style="margin-left:-10% ;">
+      <h1 >You have following requests</h1>
+      <mat-form-field appearance="standard">
+        <mat-label>Filter</mat-label>
+        <input matInput (keyup)="applyFilter($event)" placeholder="Ex. BBØ" #input>
+      </mat-form-field>
+      <form [formGroup]="registerForm">
+        <table style="width: 100%;"mat-table [dataSource]="dataSource" matSort>
+  
+          <!-- ID Column -->
+          <ng-container matColumnDef="id">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+            <td mat-cell *matCellDef="let row"> {{row.id}} </td>
+          </ng-container>
+      
+          <ng-container matColumnDef="fromDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> From Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.fromDate | date: 'yyyy-MM-dd'}}</td>
+          </ng-container>
+      
+          <ng-container matColumnDef="toDate">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> To Date </th>
+            <td mat-cell *matCellDef="let row"> {{row.toDate | date: 'yyyy-MM-dd' }}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="status">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> Status </th>
+            <td mat-cell *matCellDef="let row"> {{row.status}}</td>
+          </ng-container>
+  
+          <ng-container matColumnDef="action">
+            <th mat-header-cell *matHeaderCellDef mat-sort-header> </th>
+            <td mat-cell *matCellDef="let row" > <button *ngIf="row.status" (click)="saveStatus(row.id)">Action</button></td>
+          </ng-container>
+      
+          <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+      
+          <!-- Row shown when there is no matching data. -->
+          <tr class="mat-row" *matNoDataRow>
+            <td class="mat-cell" colspan="4">No data matching the filter "{{input.value}}"</td>
+          </tr>
+        </table>
+      
+        <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
+      </form>
+    </div>
+    
+  </div>
+  </mat-dialog-content>
+ 
+  </div>
