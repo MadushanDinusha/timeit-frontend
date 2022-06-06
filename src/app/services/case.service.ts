@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class CaseService {
 
-  private baseUrl = "http://localhost:8081/api/v1"
+  private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
   
   constructor(private httpClient : HttpClient) { }
 

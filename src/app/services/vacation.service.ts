@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class VacationService {
-  private baseUrl = "http://localhost:8081/api/v1"
+  private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
 
   constructor(private httpclient:HttpClient) { }
 

@@ -25,7 +25,7 @@ export class AuthService {
     
     const headers = new HttpHeaders({Authorization : 'Basic '+btoa(username + ":" + password)})
     sessionStorage.setItem('btoa',btoa(username + ":" + password))
-    return this.http.get('http://localhost:8081/api/v1/basicauth',{headers}).pipe(map((res) => {
+    return this.http.get('https://timeit-apps.herokuapp.com/api/v1/basicauth',{headers}).pipe(map((res) => {
      this.username = username;
      this.password = password;
      this.userService.header = headers;
