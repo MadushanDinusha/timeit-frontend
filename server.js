@@ -4,11 +4,11 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/timeit-frontend'));
+app.use(express.static(__dirname + '/dist/timeit'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/timeit-frontend/index.html'));
+res.sendFile(path.join(__dirname+'/dist/timeit/index.html'));
 });
 
 
