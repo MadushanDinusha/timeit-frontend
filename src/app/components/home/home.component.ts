@@ -104,7 +104,7 @@ export class HomeComponent implements OnInit {
    }
 
   formatDate(date: Date){
-   let d =  new Date(date + ' UTC');
+   let d =  new Date(date);
     return d;
   }
 
