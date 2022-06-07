@@ -104,8 +104,8 @@ export class HomeComponent implements OnInit {
    }
 
   formatDate(date: Date){
-   let d =  new Date(date);
-    return d.getUTCDate();
+   let d =  new Date(date + ' UTC');
+    return d;
   }
 
   getNextTasks(){
@@ -113,7 +113,7 @@ export class HomeComponent implements OnInit {
     this.taskService.getTasks(name)
     .subscribe(res => {
       res as Task[];
-
+      console.log(res)
      if(res.length>0){
       if(this.getTodayTasks1(this.datepipe.transform(res[0].fromDate, 'yyyy-MM-dd'))){
         this.task1Type = res[0].type;
