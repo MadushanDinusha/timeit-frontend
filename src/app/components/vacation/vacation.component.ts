@@ -83,18 +83,24 @@ export class VacationComponent  {
     // this.calendarOptions = {events : [{date: '2022-05-02',display: 'background',backgroundColor:this.colorgreen}]}
 
     for(let r of res){
+      
+      var date = new Date(r.toDate)
+      date.setDate(date.getDate() + 1)
       if(r.status==="Completed"){
-      let todate = (this.Datepipe.transform(r.toDate,'yyyy-MM-dd'))
+        
+
+      let todate = (this.Datepipe.transform(date,'yyyy-MM-dd'))
       let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
+
        this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"green" })
         // console.log(r)
       }else if(r.status ==="pending"){
-        let todate = (this.Datepipe.transform(r.toDate,'yyyy-MM-dd'))
+        let todate = (this.Datepipe.transform(date,'yyyy-MM-dd'))
         let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
          this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"blue" })
         // console.log("pending"+r)
       }else if(r.status ==="Rejected"){
-        let todate = (this.Datepipe.transform(r.toDate,'yyyy-MM-dd'))
+        let todate = (this.Datepipe.transform(date,'yyyy-MM-dd'))
         let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
          this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"red" })
         // console.log("rejected"+r)

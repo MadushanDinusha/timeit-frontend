@@ -88,7 +88,7 @@ export class CasesComponent implements OnInit {
   this.chart = new Chart('canvas', {
     type: 'line',
     data: {
-      labels: ["week1","week2","week3","week4"],
+      labels: this.returnweeks,
       datasets: [
         {data:[]}
       ]
