@@ -2,7 +2,7 @@ import { DatePipe, } from '@angular/common';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import * as Chart from 'chart.js';
+import { Chart, ChartData, ChartEvent, ChartType } from 'chart.js';
 import { AuthService } from 'src/app/services/auth.service';
 import { CaseService } from 'src/app/services/case.service';
 import { NavComponent } from '../nav/nav.component';
@@ -56,7 +56,7 @@ export class CasesComponent implements OnInit {
   previousMonthWeeks : Array<any>=[]
   date = new Date()
   weekMonthArray : Array<any>=[]
-
+  chart: any;
  
 
   constructor(private caseService: CaseService, private authService: AuthService,
@@ -85,31 +85,25 @@ export class CasesComponent implements OnInit {
     this.navcomp.getLoggedRole()
   }, 1000);
 
-  
+  this.chart = new Chart('canvas', {
+    type: 'line',
+    data: {
+      labels: ["week1","week2","week3","week4"],
+      datasets: [
+        {data:[]}
+      ]
+    }
+    
+  });
   }
 
   canvas: any;
   ctx: any;
 
 
-salesData: Chart.ChartData<'line'> = {
-  labels: this.returnweeks,
-  datasets: [
-    { label: 'Last Month', data: this.latMonthSla, tension: 0.5,fill: true },
-    { label: 'This Month', data: this.thisMonthSla, tension: 0.5,fill: true},
-  ],
-};
 
-chartOptions: Chart.ChartOptions = {
-  responsive: true,
-  plugins: {
-    title: {
-      display: true,
-      text: 'Monthly SLA',
-    },
-  },
-};
-  
+
+
 
   doSubmit(){
     console.log(this.registerForm.value)
@@ -194,7 +188,9 @@ chartOptions: Chart.ChartOptions = {
       this.returnweeks.push(week)
      }
    }
-
+   this.chart.data.datasets[0] = { label: 'Last Month', data: this.latMonthSla, tension: 0.5,fill: true }
+   this.chart.data.datasets[1] = { label: 'This Month', data: this.thisMonthSla, tension: 0.5,fill: true}
+  this.chart.update()
   }
   
   getMonthFromWeek(weekNumber :number) {
