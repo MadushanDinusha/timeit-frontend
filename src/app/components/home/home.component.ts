@@ -105,7 +105,7 @@ export class HomeComponent implements OnInit {
 
   formatDate(date: Date){
    let d =  new Date(date);
-    return d.toUTCString();
+    return d.getUTCDate();
   }
 
   getNextTasks(){
@@ -117,15 +117,15 @@ export class HomeComponent implements OnInit {
      if(res.length>0){
       if(this.getTodayTasks1(this.datepipe.transform(res[0].fromDate, 'yyyy-MM-dd'))){
         this.task1Type = res[0].type;
-        this.task1StartTime = this.formatDate(res[0].fromDate)
-        this.task1EndTime = this.formatDate(res[0].toDate)
+        this.task1StartTime = String(this.formatDate(res[0].fromDate))
+        this.task1EndTime = String(this.formatDate(res[0].toDate))
         
       }}
       if(res.length > 1){
         if(this.getTodayTasks2(this.datepipe.transform(res[1].fromDate, 'yyyy-MM-dd'))){
           this.task2Type = res[1].type;
-        this.task2StartTime = this.formatDate(res[1].fromDate)
-        this.task2EndTime = this.formatDate(res[1].toDate)
+        this.task2StartTime = String(this.formatDate(res[1].fromDate))
+        this.task2EndTime = String(this.formatDate(res[1].toDate))
         }
       }
     })
