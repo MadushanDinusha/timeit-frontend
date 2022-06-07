@@ -75,27 +75,47 @@ export class ScheduleComponent implements OnInit {
     editable: true,
     dateClick:this.addTime.bind(this),
     eventMouseEnter: function(info) {
-      new Tooltip(info.el, {
+      var t = new Tooltip(info.el, {
         
         title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title)),
         placement: 'top',
         trigger: 'hover',
         container: 'body',
       });
+      setTimeout(() => {
+        t.dispose()
+      }, 2000);
+     
+    },
+    eventMouseLeave:function(info){
+      var t = new Tooltip(info.el, {
+        
+        title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title)),
+        placement: 'top',
+        trigger: 'hover',
+        container: 'body',
+      });
+      t.dispose()
     },
     resourceAreaHeaderContent: 'Employee',
     resources: this.Resources,
     events: this.Events,
     };
   }
-  
+
+  formatDate(date: Date){
+    let d =  new Date(date);
+    d.setHours(d.getHours()-3)
+     return d.toUTCString();
+   }
+ 
 
   setSchedule(res:any){
 
     for(let r of res){
       this.Resources.push({id: r.user.username,title: r.user.username})
-      let todate = (this.Datepipe.transform(r.toDate,'yyyy-MM-dd HH:mm'))
-      let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd HH:mm'))
+      let todate = (this.Datepipe.transform(this.formatDate(r.toDate),'yyyy-MM-dd HH:mm'))
+      let fromDate = (this.Datepipe.transform(this.formatDate(r.fromDate),'yyyy-MM-dd HH:mm'))
       if(r.type=="Phone"){
 
         this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"blue" })

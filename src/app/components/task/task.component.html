@@ -24,12 +24,12 @@
 
     <ng-container matColumnDef="fromDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> From Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.fromDate | date: 'yyyy-MM-dd HH:mm'}}</td>
+      <td mat-cell *matCellDef="let row"> {{row.fromDate | date: 'yy-MM-dd HH:mm' :'+0000' }}</td>
     </ng-container>
 
     <ng-container matColumnDef="toDate">
       <th mat-header-cell *matHeaderCellDef mat-sort-header> To Date </th>
-      <td mat-cell *matCellDef="let row"> {{row.toDate | date: 'yyyy-MM-dd HH:mm' }}</td>
+      <td mat-cell *matCellDef="let row"> {{row.toDate | date: 'yy-MM-dd HH:mm' :'+0000' }}</td>
     </ng-container>
     
     <ng-container matColumnDef="active">

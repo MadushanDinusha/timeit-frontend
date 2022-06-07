@@ -81,7 +81,7 @@ background-color: #1e1e2f; }
   
 .popper,
 .tooltip {
-  position: absolute;
+  /* position: absolute; */
   z-index: 9999;
   background: #FFC107;
   color: black;
@@ -104,7 +104,7 @@ background-color: #1e1e2f; }
   width: 0;
   height: 0;
   border-style: solid;
-  position: absolute;
+  /* position: absolute; */
   margin: 5px;
 }
 
