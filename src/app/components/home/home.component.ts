@@ -7,7 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { NavComponent } from '../nav/nav.component';
 import { SaveTaskComponent } from '../save-task/save-task.component';
 import { TaskComponent } from '../task/task.component';
-
+import * as moment from "moment";
 
 export interface Task{
   id:number;
@@ -117,9 +117,9 @@ export class HomeComponent implements OnInit {
      if(res.length>0){
       if(this.getTodayTasks1(this.datepipe.transform(res[0].fromDate, 'yyyy-MM-dd'))){
         this.task1Type = res[0].type;
-        this.task1StartTime = String(this.formatDate(res[0].fromDate))
-        this.task1EndTime = String(this.formatDate(res[0].toDate))
-        
+       // this.task1StartTime = String(this.formatDate(res[0].fromDate))
+        this.task1EndTime = String(moment(res[0].toDate).toDate())
+        this.task1StartTime = String(moment(res[0].fromDate).toDate());
       }}
       if(res.length > 1){
         if(this.getTodayTasks2(this.datepipe.transform(res[1].fromDate, 'yyyy-MM-dd'))){
