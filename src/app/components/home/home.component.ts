@@ -118,8 +118,8 @@ export class HomeComponent implements OnInit {
       if(this.getTodayTasks1(this.datepipe.transform(res[0].fromDate, 'yyyy-MM-dd'))){
         this.task1Type = res[0].type;
        // this.task1StartTime = String(this.formatDate(res[0].fromDate))
-        this.task1EndTime = String(moment(res[0].toDate).toISOString())
-        this.task1StartTime = String(moment(res[0].fromDate).toDate());
+        this.task1EndTime = String(moment(res[0].toDate).toString())
+        this.task1StartTime = String(moment(res[0].fromDate).toString());
       }}
       if(res.length > 1){
         if(this.getTodayTasks2(this.datepipe.transform(res[1].fromDate, 'yyyy-MM-dd'))){
