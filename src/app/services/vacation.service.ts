@@ -30,7 +30,7 @@ export class VacationService {
     return this.httpclient.get(`${this.baseUrl}/getVacationById/${id}`)
   }
 
-  updateStatus(status:string,id:number):Observable<any>{
+  updateStatus(status:string,id:number,userId:number):Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/updateStatus/${status}/${id}`)
   }
 

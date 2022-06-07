@@ -56,7 +56,8 @@ export class VacationDetailsComponent implements OnInit {
 
   doSubmit(status:string){
     
-    this.vacationService.updateStatus(status,this.data[1].id).subscribe(data=>{
+    this.vacationService.updateStatus(status,this.data[1].id,this.data[0].id).subscribe(data=>{
+      console.log(this.data[1])
       this.data = []
     })
   }
