@@ -32,11 +32,9 @@ export class DonutChartComponent implements OnInit {
 
 
   public chartClicked({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
   }
 
   public chartHovered({ event, active }: { event: ChartEvent, active: {}[] }): void {
-    console.log(event, active);
   }
   
 
@@ -80,7 +78,6 @@ export class DonutChartComponent implements OnInit {
   }
   
   onResize(event:any) {
-    console.log(event.target.innerWidth)
      this.width = (event.target.innerWidth <= 800) ? "200":"300";
   }
 

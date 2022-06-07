@@ -123,7 +123,6 @@ export class AnalyticsComponent implements OnInit {
     this.caseService.getAll(name).subscribe((data)=>
     {
        data as Case[];
-       console.log(data)
       this.calculateSLA(data)     
 
     }
@@ -165,7 +164,6 @@ export class AnalyticsComponent implements OnInit {
 
 
   getWeeklyData(obj:any){
-    console.log(obj)
     var jan =[]
     var feb =[]
     var mar =[]

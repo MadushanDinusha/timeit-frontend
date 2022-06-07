@@ -44,7 +44,7 @@ export class VacationDetailsComponent implements OnInit {
   // this.data[0]
  
   this.username= this.data[0].username
-    console.log(this.data)
+   
     // this.getVacationById(this.vacationID)
     
   }

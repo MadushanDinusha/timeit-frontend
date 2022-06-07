@@ -84,7 +84,7 @@ get f() { return this.registerForm.controls; }
   saveuser(){
   
     this.userService.saveUser(this.registerForm.value,this.registerForm.value.role).subscribe(
-      data=>console.log()
+      
     )
   }
 

@@ -74,7 +74,6 @@ export class NavComponent implements OnInit{
 
     getLoggedRole(){
       let a  = sessionStorage.getItem('role')
-      console.log(a)
       if(sessionStorage.getItem('role') === "ADMIN"){
         this.isAdmin = true
       }

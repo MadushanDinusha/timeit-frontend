@@ -106,9 +106,7 @@ export class CasesComponent implements OnInit {
 
 
   doSubmit(){
-    console.log(this.registerForm.value)
     var name = this.authService.getLoggedInUserName();
-    console.log(this.registerForm.value.oldestDate)
     this.registerForm.value.weekNumber = Number(this.datePipe.transform(this.registerForm.value.oldestDate,'w'))
     this.caseService.saveCase(this.registerForm.value,name).subscribe((data)=>{
      if(data=="success"){
@@ -127,7 +125,6 @@ export class CasesComponent implements OnInit {
     this.caseService.getAll(name).subscribe((data)=>
     {
        data as Case[];
-       console.log(data)
        this.latestReg = data[data.length-1].oldestDate
        this.oldReg = data[0].oldestDate
        this.priority1 = Number(data[data.length-1].fPriorityNum)

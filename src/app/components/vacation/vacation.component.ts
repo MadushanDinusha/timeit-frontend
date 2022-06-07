@@ -56,7 +56,7 @@ export class VacationComponent  {
   }
 
   showdata(){
-    // console.log(this.Events)
+   
     this.calendarOptions = {
         
       initialView: 'dayGridMonth',
@@ -74,7 +74,7 @@ export class VacationComponent  {
     this.vacationService.getVacationdays(this.user).subscribe((res)=>{
     {
      
-      console.log(res)
+     
         this.setStatus(res)}
     })
   }
@@ -93,21 +93,21 @@ export class VacationComponent  {
       let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
 
        this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"green" })
-        // console.log(r)
+        
       }else if(r.status ==="pending"){
         let todate = (this.Datepipe.transform(date,'yyyy-MM-dd'))
         let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
          this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"blue" })
-        // console.log("pending"+r)
+        
       }else if(r.status ==="Rejected"){
         let todate = (this.Datepipe.transform(date,'yyyy-MM-dd'))
         let fromDate = (this.Datepipe.transform(r.fromDate,'yyyy-MM-dd'))
          this.Events.push({start:fromDate,end:todate,display:"background",backgroundColor:"red" })
-        // console.log("rejected"+r)
+      
       }
     }
     let el: HTMLElement = this.myButton.nativeElement as HTMLElement;
-    // console.log(el)
+    
     setTimeout(()=> el.click(), 500);
   }
   
