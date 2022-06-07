@@ -9,7 +9,7 @@
             <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
             <mat-card-content>
    <!-- <p>This card indeterminates progress bar.</p> -->
-              <p *ngIf="isTodayTask1">{{task1StartTime | date: 'hh:mm a z'}}  to {{task1EndTime | date: 'hh:mm a z'}} &nbsp; {{ task1Type }}</p>
+              <p *ngIf="isTodayTask1">{{task1StartTime | date: 'hh:mm a'}}  to {{task1EndTime | date: 'hh:mm a'}} &nbsp; {{ task1Type }}</p>
               <p *ngIf="isTodayTask2">{{task2StartTime | date: 'hh:mm a' }}  to {{task2EndTime | date: 'hh:mm a'}} &nbsp; {{ task2Type}}</p>
             </mat-card-content>
           
