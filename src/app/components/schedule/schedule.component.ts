@@ -84,7 +84,7 @@ export class ScheduleComponent implements OnInit {
       });
       setTimeout(() => {
         t.dispose()
-      }, 2000);
+      }, 1500);
      
     },
     eventMouseLeave:function(info){
