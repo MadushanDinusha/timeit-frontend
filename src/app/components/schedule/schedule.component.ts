@@ -113,7 +113,7 @@ export class ScheduleComponent implements OnInit {
   setSchedule(res:any){
 
     for(let r of res){
-      this.Resources.push({id: r.user.username,title: r.user.username})
+      this.Resources.push({id: r.user.username,title: r.user.fullName})
       let todate = (this.Datepipe.transform(this.formatDate(r.toDate),'yyyy-MM-dd HH:mm'))
       let fromDate = (this.Datepipe.transform(this.formatDate(r.fromDate),'yyyy-MM-dd HH:mm'))
       if(r.type=="Phone"){
