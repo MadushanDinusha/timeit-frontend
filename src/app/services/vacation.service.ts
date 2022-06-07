@@ -31,7 +31,7 @@ export class VacationService {
   }
 
   updateStatus(status:string,id:number,userId:number):Observable<any>{
-    return this.httpclient.get(`${this.baseUrl}/updateStatus/${status}/${id}`)
+    return this.httpclient.get(`${this.baseUrl}/updateStatus/${status}/${id}/${userId}`)
   }
 
   getPendings():Observable<any>{
