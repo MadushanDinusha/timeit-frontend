@@ -57,17 +57,35 @@ export class AddScheduleComponent implements OnInit {
 
 
   save(){
-    console.log(this.registerForm.value)
-    this.scheduleService.addSchedule(this.registerForm.value,this.registerForm.value.fullName).subscribe((data)=>{
-     {
-    this._snackBar.openFromComponent(SuccessSnackbarComponent,{duration:5000})
-  
-    } 
-    },(error)=>{
-      this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
+    
+    if(this.registerForm.value.type==="Phone"){
+      if(sessionStorage.getItem("role") == "ADMIN"){
+        this.scheduleService.addSchedule(this.registerForm.value,this.registerForm.value.fullName).subscribe((data)=>{
+          {
+         this._snackBar.openFromComponent(SuccessSnackbarComponent,{duration:5000})
+       
+         } 
+         },(error)=>{
+           this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
+         }
+         
+         );
+      }else{
+        alert("Only Admins can save Phone tasks")
+      }
+    }else{
+      this.scheduleService.addSchedule(this.registerForm.value,this.registerForm.value.fullName).subscribe((data)=>{
+        {
+       this._snackBar.openFromComponent(SuccessSnackbarComponent,{duration:5000})
+     
+       } 
+       },(error)=>{
+         this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
+       }
+       
+       );
     }
     
-    );
   }
 
   getAllUsers(){
