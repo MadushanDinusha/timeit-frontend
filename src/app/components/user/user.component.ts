@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { faL } from '@fortawesome/free-solid-svg-icons';
 import { AuthService } from 'src/app/services/auth.service';
 import { UserService } from 'src/app/services/user.service';
+import { SuccessSnackbarComponent } from '../success-snackbar/success-snackbar.component';
+import { WarnSnackbarComponent } from '../warn-snackbar/warn-snackbar.component';
 
 
 interface Roles{
@@ -29,7 +32,7 @@ export class UserComponent implements OnInit {
   constructor(private userService:UserService,
     private formBuilder: FormBuilder,
     private authService:AuthService,
-    private router:Router) { }
+    private router:Router, private _snackBar:MatSnackBar) { }
   submitted=false;
   user: User = new User();
   roles!:string;
@@ -84,8 +87,14 @@ get f() { return this.registerForm.controls; }
   saveuser(){
   
     this.userService.saveUser(this.registerForm.value,this.registerForm.value.role).subscribe(
-      
-    )
+      (data)=>{
+        {
+         this._snackBar.openFromComponent(SuccessSnackbarComponent,{duration:5000})
+        }
+       },(error)=>{
+        
+         this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
+       })
   }
 
 }
