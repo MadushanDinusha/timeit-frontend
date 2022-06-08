@@ -22,6 +22,8 @@ export class ScheduleComponent implements OnInit {
   Resources: any[] = [];
   @ViewChild('myButton',{static: true}) myButton! : ElementRef;
   
+
+
   constructor(private userService:UserService, private matDialog:MatDialog, private scheduleService:ScheduleService,
     private navcomp:NavComponent ) { }
 
@@ -47,12 +49,15 @@ export class ScheduleComponent implements OnInit {
   }
 
   addTime(){
+    
     this.matDialog.open(AddScheduleComponent)
   }
 
   calendarOptions: CalendarOptions ={
     initialView: 'resourceTimelineDay',
-    height:200
+    height:200,
+    
+    
   }
 
   getAllSchdules(){
@@ -64,13 +69,16 @@ export class ScheduleComponent implements OnInit {
   showdata(){
 
     this.calendarOptions = {
+     
+    
     height:350,
     timeZone: 'UTC',
     aspectRatio: 1.5,
+   
     headerToolbar: {
-      left: 'prev,next',
+      left: '',
       center: 'title',
-      right: 'resourceTimelineDay,resourceTimelineWeek,resourceTimelineMonth'
+      right: 'prev,next'
     },
     editable: true,
     dateClick:this.addTime.bind(this),
