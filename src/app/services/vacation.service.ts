@@ -7,7 +7,7 @@ import { Observable } from 'rxjs';
 })
 export class VacationService {
   private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
-
+  // private baseUrl = "https://localhost:8081/api/v1"
   constructor(private httpclient:HttpClient) { }
 
   save(vacation:any,user:string):Observable<any>{
@@ -36,5 +36,9 @@ export class VacationService {
 
   getPendings():Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/getPending`)
+  }
+
+  getVacationDays(name:string){
+    return this.httpclient.get(`${this.baseUrl}/getVacationDays/${name}`)
   }
 }

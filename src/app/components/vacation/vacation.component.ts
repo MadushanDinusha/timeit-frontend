@@ -58,7 +58,11 @@ export class VacationComponent  {
   showdata(){
    
     this.calendarOptions = {
-        
+      headerToolbar: {
+        left: 'title',
+        center: '',
+        right: 'prev,next'
+      },
       initialView: 'dayGridMonth',
   dateClick: this.openApplyVacation.bind(this),
   events: this.Events,

@@ -12,7 +12,8 @@ export class UserService {
   @Input('header')  header! : HttpHeaders;
  
   user: User = new User();
-  private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
+   private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
+  // private baseUrl = "https://localhost:8081/api/v1"
   constructor(private httpClient : HttpClient) { }
 
   getUserRole(name: any):Observable<any>{

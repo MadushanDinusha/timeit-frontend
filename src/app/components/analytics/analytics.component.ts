@@ -60,6 +60,7 @@ export class AnalyticsComponent implements OnInit {
   canvas: any;
   ctx: any;
   users: Array<User> = []
+  vacation:number =0
  
   dataSet=[]
 
@@ -160,6 +161,13 @@ export class AnalyticsComponent implements OnInit {
     const firstDay = new Date(d1.getFullYear(), d1.getMonth(), 1).getDay();
     var weekNum =  Math.ceil((d1.getDate() + (firstDay - 1)) / 7);
     return weekNumber;
+  }
+
+  getNumberofVacationDays(name:string){
+    this.vacationService.getVacationDays(name).subscribe(data=>{
+      this.vacation = Number(data)
+      console.log(data)
+    })
   }
 
 
@@ -585,6 +593,6 @@ export class AnalyticsComponent implements OnInit {
 
   changeUser(user:any){
     this.getCases(user.value);
-
+    this.getNumberofVacationDays(user.value)
   }
 }

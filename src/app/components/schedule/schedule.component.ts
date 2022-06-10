@@ -76,8 +76,8 @@ export class ScheduleComponent implements OnInit {
     aspectRatio: 1.5,
    
     headerToolbar: {
-      left: '',
-      center: 'title',
+      left: 'title',
+      center: '',
       right: 'prev,next'
     },
     editable: true,

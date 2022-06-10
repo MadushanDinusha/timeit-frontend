@@ -8,8 +8,8 @@ import { Observable } from 'rxjs';
 
 export class TaskService {
 
-  private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
-  
+   private baseUrl = "https://timeit-apps.herokuapp.com/api/v1"
+  // private baseUrl = "https://localhost:8081/api/v1"
   constructor(private httpClient : HttpClient) { }
 
   getTasks(name: string): Observable<any> {
