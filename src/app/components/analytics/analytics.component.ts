@@ -8,6 +8,15 @@ import { CaseService } from 'src/app/services/case.service';
 import { DatePipe } from '@angular/common';
 import { SaveTaskComponent } from '../save-task/save-task.component';
 import { throwIfEmpty } from 'rxjs';
+import { MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
+
+export interface VacationData {
+  fromDate: Date;
+  toDate: Date;
+}
+
 
 export class Case{
   fPriorityNum! : number;
@@ -64,6 +73,13 @@ export class AnalyticsComponent implements OnInit {
  
   dataSet=[]
 
+  displayedColumns: string[] = ['position','From', 'To'];
+  public dataSource = new MatTableDataSource<Task>()
+
+  @ViewChild(MatPaginator) paginator!: MatPaginator;
+  @ViewChild(MatSort) sort!: MatSort;
+
+  
   constructor(private navcomp:NavComponent, private userService:UserService, private taskService:TaskService,
     private vacationService: VacationService, private caseService:CaseService,private datePipe: DatePipe,
     private saveTask:SaveTaskComponent) { }
@@ -101,6 +117,21 @@ export class AnalyticsComponent implements OnInit {
     this. getNumberOfUsers();
     this.pendingRequest();
   }
+
+  ngAfterViewInit() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+  }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+
+    if (this.dataSource.paginator) {
+      this.dataSource.paginator.firstPage();
+    }
+  }
+
 
   getMonthlyNumberOfTasks(){
     this.taskService.getNumberOfTasks().subscribe(res=>{
@@ -165,7 +196,7 @@ export class AnalyticsComponent implements OnInit {
 
   getNumberofVacationDays(name:string){
     this.vacationService.getVacationDays(name).subscribe(data=>{
-      this.vacation = Number(data)
+      this.dataSource.data = data 
       console.log(data)
     })
   }

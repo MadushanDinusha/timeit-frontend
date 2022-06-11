@@ -38,7 +38,7 @@ export class VacationService {
     return this.httpclient.get(`${this.baseUrl}/getPending`)
   }
 
-  getVacationDays(name:string){
+  getVacationDays(name:string):Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/getVacationDays/${name}`)
   }
 }
