@@ -71,7 +71,7 @@
     left: 5%;
 }
 .progress.blue .progress-bar{
-    border-color: #fb0606;
+    border-color: #039730;
 }
 .progress.blue .progress-left .progress-bar{
     animation: loading-2 1.5s linear forwards 1.8s;
