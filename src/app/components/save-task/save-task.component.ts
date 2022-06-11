@@ -119,7 +119,7 @@ export class SaveTaskComponent implements OnInit {
      this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
    }
    
-   );
+   ); 
 }
 
 }
