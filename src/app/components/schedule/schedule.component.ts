@@ -7,6 +7,7 @@ import { UserService } from 'src/app/services/user.service';
 import { AddScheduleComponent } from '../add-schedule/add-schedule.component';
 import Tooltip from 'tooltip.js'; 
 import { NavComponent } from '../nav/nav.component';
+import { TaskService } from 'src/app/services/task.service';
 
 @Component({
   selector: 'app-schedule',
@@ -24,7 +25,7 @@ export class ScheduleComponent implements OnInit {
   
 
 
-  constructor(private userService:UserService, private matDialog:MatDialog, private scheduleService:ScheduleService,
+  constructor(private userService:UserService, private matDialog:MatDialog, private taskService:TaskService,
     private navcomp:NavComponent ) { }
 
   ngOnInit(): void {
@@ -61,7 +62,8 @@ export class ScheduleComponent implements OnInit {
   }
 
   getAllSchdules(){
-    this.scheduleService.getAll().subscribe(data=>{
+    this.taskService.getAll().subscribe(data=>{
+      console.log(data)
       this.setSchedule(data)
     })
   }

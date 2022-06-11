@@ -48,4 +48,8 @@ export class TaskService {
   getUsersCount():Observable<any>{
     return this.httpClient.get(`${this.baseUrl}/getUserCount`)
   }
+
+  getAll():Observable<any>{
+    return this.httpClient.get(`${this.baseUrl}/getAllTasks`)
+  }
 }
