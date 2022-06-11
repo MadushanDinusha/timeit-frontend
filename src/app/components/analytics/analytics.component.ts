@@ -70,10 +70,11 @@ export class AnalyticsComponent implements OnInit {
   ctx: any;
   users: Array<User> = []
   vacation:number =0
+  userOnVac:number =0
  
   dataSet=[]
 
-  displayedColumns: string[] = ['position','From', 'To'];
+  displayedColumns: string[] = ['position','From', 'To','Status'];
   public dataSource = new MatTableDataSource<Task>()
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -116,6 +117,13 @@ export class AnalyticsComponent implements OnInit {
     this.getMonthlyNumberOfTasks();
     this. getNumberOfUsers();
     this.pendingRequest();
+    this. getUsersOnVac();
+  }
+
+  getUsersOnVac(){
+    this.vacationService.getUsersOnVac().subscribe(data=>{
+      this.userOnVac = Number(data)
+    })
   }
 
   ngAfterViewInit() {

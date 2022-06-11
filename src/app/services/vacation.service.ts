@@ -41,4 +41,8 @@ export class VacationService {
   getVacationDays(name:string):Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/getVacationDays/${name}`)
   }
+
+  getUsersOnVac(){
+    return this.httpclient.get(`${this.baseUrl}/userOnVac`)
+  }
 }
