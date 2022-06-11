@@ -94,7 +94,8 @@ export class SaveTaskComponent implements OnInit {
 
   save(){
     var name = this.authService.getLoggedInUserName();
-
+    if(this.registerForm.value.type==="Phone"){
+      if(sessionStorage.getItem("role") == "ADMIN"){
     this.taskService.createTask(this.registerForm.value,this.registerForm.value.fullName)
       .subscribe((data)=>{
        {
@@ -104,7 +105,24 @@ export class SaveTaskComponent implements OnInit {
        
         this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
       })
+  }else{
+    alert("Only Admins can save Phone tasks")
   }
+}else{
+  this.taskService.createTask(this.registerForm.value,this.registerForm.value.fullName)
+      .subscribe((data)=>{
+    {
+   this._snackBar.openFromComponent(SuccessSnackbarComponent,{duration:5000})
+ 
+   } 
+   },(error)=>{
+     this._snackBar.openFromComponent(WarnSnackbarComponent,{duration:5000})
+   }
+   
+   );
+}
+
+}
 
   onSubmit() {
     if (this.registerForm.invalid) {

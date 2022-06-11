@@ -8,7 +8,7 @@
       <a mat-list-item  href="case"><fa-icon [icon]="faCoffee"></fa-icon> Cases</a>
       <a mat-list-item  href="vacation"><fa-icon [icon]="faplane"></fa-icon> Vacation</a>
       <a mat-list-item  href="schedule"><fa-icon [icon]="faschdule"></fa-icon> Schedule</a>
-      <a *ngIf="isAdmin"  mat-list-item (click)="openCreateTask()"><fa-icon [icon]="faTasks"></fa-icon>Add Task</a>
+      <a mat-list-item (click)="openCreateTask()"><fa-icon [icon]="faTasks"></fa-icon>Add Task</a>
       <a *ngIf="isAdmin" mat-list-item (click)="openCreateUser()"><fa-icon [icon]="fauser"></fa-icon>Create User</a>
       <a *ngIf="isAdmin"  mat-list-item href="analytics"><fa-icon [icon]="faLineChart"></fa-icon>Analytics</a>
     </mat-nav-list>
