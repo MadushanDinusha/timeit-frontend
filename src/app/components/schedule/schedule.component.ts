@@ -123,6 +123,9 @@ export class ScheduleComponent implements OnInit {
     eventDrop: eventDrop => { 
        this.updateDrag(eventDrop)
     },
+    eventResize:eventResize=>{
+      this.updateDrag(eventResize)
+    },
     eventMouseEnter: function(info) {
       var t = new Tooltip(info.el, {
         
