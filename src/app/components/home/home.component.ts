@@ -112,6 +112,7 @@ export class HomeComponent implements OnInit {
     var name = this.authService.getLoggedInUserName()
     this.taskService.getTasks(name)
     .subscribe(res => {
+      console.log(res)
       res as Task[];
      if(res.length>0){
       if(this.getTodayTasks1(this.datepipe.transform(res[0].fromDate, 'yyyy-MM-dd'))){

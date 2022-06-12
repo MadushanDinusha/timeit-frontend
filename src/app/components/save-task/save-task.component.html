@@ -21,6 +21,12 @@
         </div>
         <div class="form-group">
           <mat-form-field class="example-full-width">
+            <mat-label>comment</mat-label>
+            <input matInput id="comment" type="text" formControlName="comment" name="comment" >
+          </mat-form-field>
+        </div>
+        <div class="form-group">
+          <mat-form-field class="example-full-width">
             <mat-label>Task Type</mat-label>
             <mat-select  formControlName="type" name="food" id="type" name="type">
               <mat-option *ngFor="let type of types" [value]="type.value">
@@ -39,6 +45,8 @@
             </mat-select>
           </mat-form-field>
         </div>
+
+       
         
       </div>
       

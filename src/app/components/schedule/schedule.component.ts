@@ -133,6 +133,7 @@ export class ScheduleComponent implements OnInit {
         placement: 'top',
         trigger: 'hover',
         container: 'body',
+
       });
       setTimeout(() => {
         t.dispose()
@@ -140,9 +141,10 @@ export class ScheduleComponent implements OnInit {
      
     },
     eventMouseLeave:function(info){
+      console.log(info.event.extendedProps['comment'])
       var t = new Tooltip(info.el, {
         
-        title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title)),
+        title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title))+ " - " +(JSON.stringify(info.event.extendedProps['comment'])),
         placement: 'top',
         trigger: 'hover',
         container: 'body',
@@ -169,30 +171,33 @@ export class ScheduleComponent implements OnInit {
       this.Resources.push({id: r.user.username,title: r.user.fullName})
       let todate = (this.Datepipe.transform(this.formatDate(r.toDate),'yyyy-MM-dd HH:mm'))
       let fromDate = (this.Datepipe.transform(this.formatDate(r.fromDate),'yyyy-MM-dd HH:mm'))
+      if(r.comment == null){
+        r.comment = ''
+      }
       if(r.type=="Phone"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"blue" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"blue" })
       }else if(r.type =="Meeting"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"red" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"red" })
       }else if(r.type=="BBØ"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"green" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"green" })
       }else if(r.type=="HO"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"yellow" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"yellow" })
       }else if(r.type=="Mails"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"orange" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"orange" })
       }else if(r.type=="Fri"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"black" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"black" })
       }else if(r.type=="Syg"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"pink" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"pink" })
       }else if(r.type=="Andet"){
 
-        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"purple" })
+        this.Events.push({comment:r.comment,publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"purple" })
       }
   
     }

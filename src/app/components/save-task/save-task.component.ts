@@ -35,6 +35,7 @@ export class Task{
   toDate!:String;
   type!:String;
   username!:string;
+  comment!:string;
 }
 
 
@@ -77,7 +78,8 @@ export class SaveTaskComponent implements OnInit {
       fromDate: ['',Validators.required],
       toDate: ['',Validators.required],
       type: ['',Validators.required],
-      fullName:['',Validators.required]
+      fullName:['',Validators.required],
+      comment:['']
       
   });
 
