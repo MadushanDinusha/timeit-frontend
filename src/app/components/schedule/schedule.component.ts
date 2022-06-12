@@ -73,7 +73,6 @@ export class ScheduleComponent implements OnInit {
 
   getAllSchdules(){
     this.taskService.getAll().subscribe(data=>{
-      console.log(data)
       this.setSchedule(data)
     })
   }
@@ -98,7 +97,6 @@ export class ScheduleComponent implements OnInit {
 
     }
     },(error)=>{
-      console.log(error)
     }
     
     )
@@ -129,7 +127,7 @@ export class ScheduleComponent implements OnInit {
     eventMouseEnter: function(info) {
       var t = new Tooltip(info.el, {
         
-        title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title)),
+        title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title))+ " - " +(JSON.stringify(info.event.extendedProps['comment'])),
         placement: 'top',
         trigger: 'hover',
         container: 'body',
@@ -137,11 +135,10 @@ export class ScheduleComponent implements OnInit {
       });
       setTimeout(() => {
         t.dispose()
-      }, 1500);
+      }, 2500);
      
     },
     eventMouseLeave:function(info){
-      console.log(info.event.extendedProps['comment'])
       var t = new Tooltip(info.el, {
         
         title: (JSON.stringify(info.event.start)).substring(12,17) +" - "+ (JSON.stringify(info.event.end)).substring(12,17) + " - " +(JSON.stringify(info.event.title))+ " - " +(JSON.stringify(info.event.extendedProps['comment'])),
