@@ -10,6 +10,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MatGridTileHeaderCssMatStyler } from '@angular/material/grid-list';
 import { CalendarOptions } from '@fullcalendar/angular';
 import {} from '@fullcalendar/interaction'
+import { UserService } from 'src/app/services/user.service';
 import { VacationService } from 'src/app/services/vacation.service';
 import { ApplyVacationComponent } from '../apply-vacation/apply-vacation.component';
 import { NavComponent } from '../nav/nav.component';
@@ -30,10 +31,12 @@ export class VacationComponent  {
   user!: string;
   Datepipe = new DatePipe('en-US');
   event :Array<any> =[]
+  selectedValue!: string;
+  users: Array<User> = []
 
   @ViewChild('myButton',{static: true}) myButton! : ElementRef;
   
-  constructor(private matDialog:MatDialog,private vacationService:VacationService, private navcomp:NavComponent){
+  constructor(private matDialog:MatDialog,private vacationService:VacationService, private navcomp:NavComponent,private userService:UserService){
 
   }
   onDateClick(res: any) {
@@ -42,17 +45,27 @@ export class VacationComponent  {
 
   calendarOptions: CalendarOptions ={
   }
-
+  getAllUsers(){
+    
+    this.userService.getAllUsers().subscribe(data=> this.users = data as User[])
+  }
+  changeUser(user:any){
+    // this.getCases(user.value);
+    // this.getNumberofVacationDays(user.value)
+    this.getVacationdays(user.value)
+    console.log(user.value)
+  }
   
   ngOnInit() {
     this.Events.push(this.event)
     this.user = String(sessionStorage.getItem('authenticatedUser'))
 
-    this.getVacationdays()
+    this.getVacationdays(this.user)
     
     setTimeout(() => {
       this.navcomp.getLoggedRole()
     }, 1000);
+    this.getAllUsers()
   }
 
   showdata(){
@@ -74,8 +87,8 @@ export class VacationComponent  {
       {panelClass:'task'})
   }
 
-  getVacationdays(){
-    this.vacationService.getVacationdays(this.user).subscribe((res)=>{
+  getVacationdays(user:string){
+    this.vacationService.getVacationdays(user).subscribe((res)=>{
     {
      
      
@@ -85,7 +98,7 @@ export class VacationComponent  {
 
   setStatus(res:any){
     // this.calendarOptions = {events : [{date: '2022-05-02',display: 'background',backgroundColor:this.colorgreen}]}
-
+this.Events = []
     for(let r of res){
       
       var date = new Date(r.toDate)

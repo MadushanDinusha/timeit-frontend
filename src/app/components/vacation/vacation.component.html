@@ -4,8 +4,17 @@
 <br>
 
 <div class="container">
+  <mat-form-field class="example-full-width">
+    <mat-label>Select-User</mat-label>
+    <mat-select  [(ngModel)]="selectedValue" (selectionChange)="changeUser($event)"   >
+      <mat-option  *ngFor="let user of users" [value]="user.username">
+        {{user.fullName}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
 <div style="padding: 5%;">
   <button  #myButton (click)="showdata()" [hidden]="true">showdata</button>
   <full-calendar [options]="calendarOptions" [deepChangeDetection]="true"></full-calendar>
 </div>
+
 </div>
