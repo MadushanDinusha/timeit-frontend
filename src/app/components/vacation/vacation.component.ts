@@ -71,9 +71,15 @@ export class VacationComponent  {
   showdata(){
    
     this.calendarOptions = {
+      customButtons: {
+        myCustomButton: {
+          text: 'Vacation Details',
+        
+        }
+      },
       headerToolbar: {
         left: 'title',
-        center: '',
+        center: 'myCustomButton',
         right: 'prev,next'
       },
       initialView: 'dayGridMonth',

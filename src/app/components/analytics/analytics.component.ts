@@ -205,7 +205,6 @@ export class AnalyticsComponent implements OnInit {
   getNumberofVacationDays(name:string){
     this.vacationService.getVacationDays(name).subscribe(data=>{
       this.dataSource.data = data 
-      console.log(data)
     })
   }
 
