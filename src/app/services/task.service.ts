@@ -52,4 +52,8 @@ export class TaskService {
   getAll():Observable<any>{
     return this.httpClient.get(`${this.baseUrl}/getAllTasks`)
   }
+
+  updateTask(task:any,uname:string):Observable<any>{
+    return this.httpClient.post(`${this.baseUrl}/updateTask/${uname}`,task)
+  }
 }

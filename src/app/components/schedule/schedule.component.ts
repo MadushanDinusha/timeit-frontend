@@ -9,6 +9,14 @@ import Tooltip from 'tooltip.js';
 import { NavComponent } from '../nav/nav.component';
 import { TaskService } from 'src/app/services/task.service';
 
+
+export class Task{
+  id!:number;
+  fromDate!:Date;
+  toDate!:Date;
+  type!:String;
+}
+
 @Component({
   selector: 'app-schedule',
   templateUrl: './schedule.component.html',
@@ -21,6 +29,8 @@ export class ScheduleComponent implements OnInit {
   Datepipe = new DatePipe('en-US');
   Events: any[] = [];
   Resources: any[] = [];
+  ar:any[]=[];
+  sendTask : Task = new Task();
   @ViewChild('myButton',{static: true}) myButton! : ElementRef;
   
 
@@ -68,6 +78,32 @@ export class ScheduleComponent implements OnInit {
     })
   }
 
+  updateDrag(arg:any){
+    let unmane = arg.event._def.resourceIds?.find((x: any) => x) as string
+    var start = arg.event._instance?.range.start as Date
+    var end =  arg.event._instance?.range.end as Date
+    var id = arg.event._def.extendedProps['publicId']
+    let d1 =  new Date(start);
+    d1.setHours(d1.getHours())
+    let d2 =  new Date(end);
+    d2.setHours(d2.getHours())
+  
+    var task = new Task()
+  
+    task.fromDate = d1
+    task.toDate = d2
+    task.id = id
+
+    this.taskService.updateTask(task,unmane).subscribe((data)=>{{
+
+    }
+    },(error)=>{
+      console.log(error)
+    }
+    
+    )
+  }
+
   showdata(){
 
     this.calendarOptions = {
@@ -84,6 +120,9 @@ export class ScheduleComponent implements OnInit {
     },
     editable: true,
     dateClick:this.addTime.bind(this),
+    eventDrop: eventDrop => { 
+       this.updateDrag(eventDrop)
+    },
     eventMouseEnter: function(info) {
       var t = new Tooltip(info.el, {
         
@@ -123,33 +162,34 @@ export class ScheduleComponent implements OnInit {
   setSchedule(res:any){
 
     for(let r of res){
+      
       this.Resources.push({id: r.user.username,title: r.user.fullName})
       let todate = (this.Datepipe.transform(this.formatDate(r.toDate),'yyyy-MM-dd HH:mm'))
       let fromDate = (this.Datepipe.transform(this.formatDate(r.fromDate),'yyyy-MM-dd HH:mm'))
       if(r.type=="Phone"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"blue" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"blue" })
       }else if(r.type =="Meeting"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"red" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"red" })
       }else if(r.type=="BBØ"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"green" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"green" })
       }else if(r.type=="HO"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"yellow" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"yellow" })
       }else if(r.type=="Mails"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"orange" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"orange" })
       }else if(r.type=="Fri"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"black" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"black" })
       }else if(r.type=="Syg"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"pink" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"pink" })
       }else if(r.type=="Andet"){
 
-        this.Events.push({title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"purple" })
+        this.Events.push({publicId:r.id,title:r.type,resourceIds: [r.user.username], start:fromDate,end:todate, color:"purple" })
       }
   
     }
