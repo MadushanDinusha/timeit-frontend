@@ -63,12 +63,7 @@ export class CasesComponent implements OnInit {
     private formBuilder: FormBuilder,private _snackBar: MatSnackBar,
     private datePipe: DatePipe, private navcomp:NavComponent) { }
 
-    myFilter = (d: Date | null): boolean => {
-      const day = (d || new Date()).getDay();
-      // Prevent Saturday and Sunday from being selected.
-      return day == 5;
-    };
-
+    
   ngOnInit(): void {
 
     this.registerForm = this.formBuilder.group({
