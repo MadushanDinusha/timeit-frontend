@@ -42,7 +42,7 @@ export class TaskService {
   }
 
   getNumberOfTasks():Observable<any>{
-    return this.httpClient.get(`${this.baseUrl}/getNumberOfTasks`)
+    return this.httpClient.get(`${this.baseUrl}/getNumberOfATasks`)
   }
 
   getUsersCount():Observable<any>{

@@ -16,12 +16,23 @@ export interface Task{
   type:String;
 }
 
+interface Food {
+  value: string;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
+
+  foods: Food[] = [
+    {value: 'mo', viewValue: '8:00 - 10:00'},
+    {value: 'lu', viewValue: '10:00 - 13:00'},
+    {value: 'di', viewValue: '13:00 - 16:00'},
+  ];
 
   userName =sessionStorage.getItem('authenticatedUser')
   task1StartTime = ""

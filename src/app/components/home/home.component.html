@@ -2,12 +2,22 @@
 <mat-grid-list [cols]="breakpoint" rowHeight="2:1" (window:resize)="onResize($event)">
   <mat-grid-tile>
    
-        <mat-card style="display: block;" class="example-card" (click)="go()">
+        <mat-card style="display: block;" class="example-card" >
           <h1 style="display: block;">WELCOME {{this.userName}}!! </h1><br><br>
-            <mat-card-title>Your Next Task Today</mat-card-title>
+
+          <mat-form-field class="example-full-width">
+            <mat-label>Prefer phone calls</mat-label>
+        <mat-select>
+          <mat-option *ngFor="let food of foods" [value]="food.value">
+            {{food.viewValue}}
+          </mat-option>
+        </mat-select>
+          </mat-form-field>
+          <br><br>
+            <mat-card-title >Your Next Task Today</mat-card-title>
             <br>
             <!-- <mat-card-subtitle>Dog Breed</mat-card-subtitle> -->
-            <mat-card-content>
+            <mat-card-content (click)="go()">
    <!-- <p>This card indeterminates progress bar.</p> -->
               <p *ngIf="isTodayTask1">{{task1StartTime | date: 'hh:mm a' :'+0000' }}  to {{task1EndTime | date: 'hh:mm a' :'+0000' }} &nbsp; {{ task1Type }}</p>
               <p *ngIf="isTodayTask2">{{task2StartTime | date: 'hh:mm a' :'+0000' }}  to {{task2EndTime | date: 'hh:mm a' :'+0000'}} &nbsp; {{ task2Type}}</p>

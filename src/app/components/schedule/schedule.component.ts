@@ -105,8 +105,8 @@ export class ScheduleComponent implements OnInit {
   showdata(){
 
     this.calendarOptions = {
-     
-    
+      
+   
     height:350,
     timeZone: 'UTC',
     aspectRatio: 1.5,
@@ -151,6 +151,13 @@ export class ScheduleComponent implements OnInit {
     resourceAreaHeaderContent: 'Employee',
     resources: this.Resources,
     events: this.Events,
+    
+    // eventTimeFormat: { 
+    //   hour: '2-digit',
+    //   minute: '2-digit',
+    //   second: '2-digit',
+    //   hour12: false
+    // },
     };
   }
 
