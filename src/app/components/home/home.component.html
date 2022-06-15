@@ -7,12 +7,17 @@
 
           <mat-form-field class="example-full-width">
             <mat-label>Prefer phone calls</mat-label>
-        <mat-select>
+        <mat-select (valueChange)="getValue($event)">
           <mat-option *ngFor="let food of foods" [value]="food.value">
             {{food.viewValue}}
           </mat-option>
         </mat-select>
+       
           </mat-form-field>
+          <div>
+
+          You are prefered to do the shift in (phone) : <b>{{displayVal}} </b>
+          </div>
           <br><br>
             <mat-card-title >Your Next Task Today</mat-card-title>
             <br>

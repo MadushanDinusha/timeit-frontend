@@ -67,6 +67,7 @@ export class SaveTaskComponent implements OnInit {
   users: Array<User> = []
 
   registerForm!: FormGroup;
+  registerForm2!:FormGroup;
   isLogged:boolean=false;
 
   constructor(private userServic:UserService,private _snackBar:MatSnackBar,

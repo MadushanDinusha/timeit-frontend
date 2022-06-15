@@ -8,12 +8,19 @@ import { NavComponent } from '../nav/nav.component';
 import { SaveTaskComponent } from '../save-task/save-task.component';
 import { TaskComponent } from '../task/task.component';
 import * as moment from "moment";
+import { WorkService } from 'src/app/services/work.service';
 
 export interface Task{
   id:number;
   fromDate:Date;
   toDate:Date;
   type:String;
+}
+
+export class Work{
+  
+  shift!:string;
+  userId!:number;
 }
 
 interface Food {
@@ -29,9 +36,9 @@ interface Food {
 export class HomeComponent implements OnInit {
 
   foods: Food[] = [
-    {value: 'mo', viewValue: '8:00 - 10:00'},
-    {value: 'lu', viewValue: '10:00 - 13:00'},
-    {value: 'di', viewValue: '13:00 - 16:00'},
+    {value: 'Morning', viewValue: '8:00 - 10:00'},
+    {value: 'Afternoon', viewValue: '10:00 - 13:00'},
+    {value: 'Evening', viewValue: '13:00 - 16:00'},
   ];
 
   userName =sessionStorage.getItem('authenticatedUser')
@@ -51,9 +58,12 @@ export class HomeComponent implements OnInit {
   width = ""
   width1 = ""
   hight=""
+  displayVal = ""
+
   constructor(
     private taskService:TaskService,private authService:AuthService, private datepipe: DatePipe,
-    private matDialog:MatDialog,private navcomp:NavComponent, private userService:UserService) { 
+    private matDialog:MatDialog,private navcomp:NavComponent, private userService:UserService,
+    private workService:WorkService) { 
     
   }
 
@@ -76,6 +86,7 @@ export class HomeComponent implements OnInit {
       this.navcomp.getLoggedRole()
     }, 1000);
     this.getNextTasks()
+    this.getValuseForWork()
     this.breakpoint = (window.innerWidth <= 1250) ? 1:2;
     this.width = (window.innerWidth <= 800) ? "450":"750";
     this.width1 = (window.innerWidth <= 800) ? "450":"450";
@@ -87,6 +98,20 @@ export class HomeComponent implements OnInit {
     return true;
   }
   
+  getValue(value:any){
+    var work = new Work()
+    work.shift = value;
+    this.displayVal = value;
+    this.workService.saveWork(work,String(sessionStorage.getItem('authenticatedUser'))).subscribe(data=>{
+
+    })
+  }
+
+  getValuseForWork(){
+    this.workService.getValuseForWork(String(sessionStorage.getItem('authenticatedUser'))).subscribe(data=>{
+      this.displayVal = data.shift;
+    })
+  }
 
   openCreateTask(){
     this.matDialog.open(SaveTaskComponent)

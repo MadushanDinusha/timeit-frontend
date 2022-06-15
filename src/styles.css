@@ -54,7 +54,7 @@ background-color: #1e1e2f; }
     margin: 0 -24px;
     padding: 0 0px;
     max-height: 2000px;
-    overflow: auto;
+    overflow: scroll;
     -webkit-overflow-scrolling: touch;
     /* width: 1000px; */
 }

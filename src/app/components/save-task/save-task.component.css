@@ -1,0 +1,16 @@
+table {
+    width: 90%;
+  }
+
+  /* td, th {
+    width: 15%;
+  } */
+
+  .mat-dialog-content {
+    display: block;
+    margin: 0 -84px;
+    padding: 0 24px;
+    max-height: 65vh;
+    overflow: scroll;
+    -webkit-overflow-scrolling: touch;
+}
