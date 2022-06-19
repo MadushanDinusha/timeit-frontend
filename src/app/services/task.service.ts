@@ -56,4 +56,9 @@ export class TaskService {
   updateTask(task:any,uname:string):Observable<any>{
     return this.httpClient.post(`${this.baseUrl}/updateTask/${uname}`,task)
   }
+
+  saveShedule(task:any):Observable<any>{
+    return this.httpClient.post(`${this.baseUrl}/saveAdminWork`,task)
+  }
 }
+

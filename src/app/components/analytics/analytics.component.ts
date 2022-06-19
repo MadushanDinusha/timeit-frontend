@@ -11,6 +11,7 @@ import { throwIfEmpty } from 'rxjs';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
+import { WorkService } from 'src/app/services/work.service';
 
 export interface VacationData {
   fromDate: Date;
@@ -83,7 +84,7 @@ export class AnalyticsComponent implements OnInit {
   
   constructor(private navcomp:NavComponent, private userService:UserService, private taskService:TaskService,
     private vacationService: VacationService, private caseService:CaseService,private datePipe: DatePipe,
-    private saveTask:SaveTaskComponent) { }
+    private saveTask:SaveTaskComponent,private workService:WorkService) { }
 
   ngOnInit(): void {
     this.chart = new Chart('canvas', {
@@ -120,6 +121,13 @@ export class AnalyticsComponent implements OnInit {
     this. getUsersOnVac();
   }
 
+  getFreeForPhone(){
+
+    this.workService.getPhoneUsers().subscribe(data=>{
+      console.log(data)
+    })
+  }
+  
   getUsersOnVac(){
     this.vacationService.getUsersOnVac().subscribe(data=>{
       this.userOnVac = Number(data)

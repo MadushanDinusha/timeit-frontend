@@ -38,6 +38,10 @@ export class Task{
   comment!:string;
 }
 
+export class AdminWork{
+  shiftType!:string
+}
+
 
 @Component({
   selector: 'app-save-task',
@@ -69,6 +73,7 @@ export class SaveTaskComponent implements OnInit {
   registerForm!: FormGroup;
   registerForm2!:FormGroup;
   isLogged:boolean=false;
+  isAdmin:boolean=false;
 
   constructor(private userServic:UserService,private _snackBar:MatSnackBar,
     private taskService:TaskService, private router:Router,private formBuilder: FormBuilder,private authService:AuthService,
@@ -83,7 +88,17 @@ export class SaveTaskComponent implements OnInit {
       comment:['']
       
   });
-
+  this.registerForm2 = this.formBuilder.group({
+    mon89:[''],tue89:[''],    wed89:[''],    thu89:[''],    fri89:[''],    mon910:[''],    tue910:[''],
+    wed910:[''],    thu910:[''],    fri910:[''],    mon1011:[''],    tue1011:[''],    wed1011:[''],    thu1011:[''],    fri1011:[''],
+    mon1112:[''],    tue1112:[''],    wed1112:[''],    thu1112:[''],    fri1112:[''],    mon1213:[''],    tue1213:[''],    wed1213:[''],
+    thu1213:[''],    fri1213:[''],    mon1314:[''],    tue1314:[''],    wed1314:[''],    thu1314:[''],    fri1314:[''],    mon1415:[''],
+    tue1415:[''],    wed1415:[''],    thu1415:[''],    fri1415:[''],    mon1516:[''],    tue1516:[''],    wed1516:[''],    thu1516:[''],
+    fri1516:[''],    mon1617:[''],    tue1617:[''],    wed1617:[''],    thu1617:[''],    fri1617:[''],
+  })
+  if(sessionStorage.getItem('role') === "ADMIN"){
+    this.isAdmin = true
+  }
   this.getAllUsers()
 
   this.isLogged = this.authService.isUserLoggedIn();
@@ -134,6 +149,15 @@ export class SaveTaskComponent implements OnInit {
     this.save();   
   }
   
-
+  saveSchedule(){
+    var adminWork = new AdminWork()
+    adminWork = this.registerForm2.value
+    this.taskService.saveShedule(adminWork).subscribe(data=>{
+      
+    })
+  }
 
 }
+
+
+   

@@ -19,4 +19,8 @@ export class WorkService {
   getValuseForWork(userName:string):Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/getWorksUser/${userName}`)
   }
+
+  getPhoneUsers():Observable<any>{
+    return this.httpclient.get(`${this.baseUrl}/getWork`)
+  }
 }
