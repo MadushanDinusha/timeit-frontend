@@ -13,6 +13,12 @@ import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { WorkService } from 'src/app/services/work.service';
 
+export interface Work{
+  user:String;
+  shift:String;
+
+}
+
 export interface VacationData {
   fromDate: Date;
   toDate: Date;
@@ -76,7 +82,9 @@ export class AnalyticsComponent implements OnInit {
   dataSet=[]
 
   displayedColumns: string[] = ['position','From', 'To','Status'];
+  displayedColumns2: string[] = ['positionss','work_id','shift'];
   public dataSource = new MatTableDataSource<Task>()
+  public dataSource2 = new MatTableDataSource<Work>();
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -125,6 +133,7 @@ export class AnalyticsComponent implements OnInit {
 
     this.workService.getPhoneUsers().subscribe(data=>{
       console.log(data)
+      this.dataSource2.data = data
     })
   }
   
