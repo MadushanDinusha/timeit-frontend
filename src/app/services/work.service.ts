@@ -23,4 +23,12 @@ export class WorkService {
   getPhoneUsers():Observable<any>{
     return this.httpclient.get(`${this.baseUrl}/getWork`)
   }
+  getAdminWork():Observable<any>{
+    return this.httpclient.get(`${this.baseUrl}/getAdminWork`)
+  }
+
+  getAllAdmin():Observable<any>{
+    return this.httpclient.get(`${this.baseUrl}/getAllAdmin`)
+  }
+  
 }

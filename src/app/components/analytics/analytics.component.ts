@@ -78,7 +78,9 @@ export class AnalyticsComponent implements OnInit {
   users: Array<User> = []
   vacation:number =0
   userOnVac:number =0
- 
+  morningShift:number=0
+  afternoonShift:number =0
+  eveningShift:number =0
   dataSet=[]
 
   displayedColumns: string[] = ['position','From', 'To','Status'];
@@ -127,6 +129,22 @@ export class AnalyticsComponent implements OnInit {
     this. getNumberOfUsers();
     this.pendingRequest();
     this. getUsersOnVac();
+   
+    this.getAdminWorkCounts();
+  }
+
+  showData(){
+    alert("kk")
+  }
+ 
+  getAdminWorkCounts(){
+    this.workService.getAdminWork().subscribe(data=>
+    {
+      this.morningShift = data[0],
+      this.afternoonShift = data[1],
+    this.eveningShift = data[2]   
+   }
+      )
   }
 
   getFreeForPhone(){

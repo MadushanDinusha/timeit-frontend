@@ -9,6 +9,7 @@ import { MatSnackBar, _SnackBarContainer } from '@angular/material/snack-bar';
 import { SuccessSnackbarComponent } from '../success-snackbar/success-snackbar.component';
 import { WarnSnackbarComponent } from '../warn-snackbar/warn-snackbar.component';
 import { HomeComponent } from '../home/home.component';
+import { WorkService } from 'src/app/services/work.service';
 
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
@@ -77,7 +78,7 @@ export class SaveTaskComponent implements OnInit {
 
   constructor(private userServic:UserService,private _snackBar:MatSnackBar,
     private taskService:TaskService, private router:Router,private formBuilder: FormBuilder,private authService:AuthService,
-    ) { }
+    private workService:WorkService) { }
 
   ngOnInit(): void {
     this.registerForm = this.formBuilder.group({
@@ -94,7 +95,7 @@ export class SaveTaskComponent implements OnInit {
     mon1112:[''],    tue1112:[''],    wed1112:[''],    thu1112:[''],    fri1112:[''],    mon1213:[''],    tue1213:[''],    wed1213:[''],
     thu1213:[''],    fri1213:[''],    mon1314:[''],    tue1314:[''],    wed1314:[''],    thu1314:[''],    fri1314:[''],    mon1415:[''],
     tue1415:[''],    wed1415:[''],    thu1415:[''],    fri1415:[''],    mon1516:[''],    tue1516:[''],    wed1516:[''],    thu1516:[''],
-    fri1516:[''],    mon1617:[''],    tue1617:[''],    wed1617:[''],    thu1617:[''],    fri1617:[''],
+    fri1516:[''],     
   })
   if(sessionStorage.getItem('role') === "ADMIN"){
     this.isAdmin = true
@@ -102,7 +103,60 @@ export class SaveTaskComponent implements OnInit {
   this.getAllUsers()
 
   this.isLogged = this.authService.isUserLoggedIn();
-  
+  this.getAllAdmin();
+  }
+
+  getAllAdmin(){
+    this.workService.getAllAdmin().subscribe(data=>{
+      console.log(data[0].mon89)
+     this.registerForm2.patchValue({
+      mon89:   data[0].mon89,
+      mon910:  data[0].mon910,
+      mon1011: data[0].mon1011,
+      mon1112: data[0].mon1112,
+      mon1213: data[0].mon1213,
+      mon1314: data[0].mon1314,
+      mon1415: data[0].mon1415,
+      mon1516: data[0].mon1516,
+     
+      tue89:   data[0].tue89,
+      tue910:  data[0].tue910,
+      tue1011: data[0].tue1011,
+      tue1112: data[0].tue1112,
+      tue1213: data[0].tue1213,
+      tue1314: data[0].tue1314,
+      tue1415: data[0].tue1415,
+      tue1516: data[0].tue1516,
+     
+      wed89:   data[0].wed89,
+      wed910:  data[0].wed910,
+      wed1011: data[0].wed1011,
+      wed1112: data[0].wed1112,
+      wed1213: data[0].wed1213,
+      wed1314: data[0].wed1314,
+      wed1415: data[0].wed1415,
+      wed1516: data[0].wed1516,
+     
+      thu89:   data[0].thu89,
+      thu910:  data[0].thu910,
+      thu1011: data[0].thu1011,
+      thu1112: data[0].thu1112,
+      thu1213: data[0].thu1213,
+      thu1314: data[0].thu1314,
+      thu1415: data[0].thu1415,
+      thu1516: data[0].thu1516,
+      
+      fri89:   data[0].fri89,
+      fri910:  data[0].fri910,
+      fri1011: data[0].fri1011,
+      fri1112: data[0].fri1112,
+      fri1213: data[0].fri1213,
+      fri1314: data[0].fri1314,
+      fri1415: data[0].fri1415,
+      fri1516: data[0].fri1516,
+     
+     })
+    })
   }
 
   getAllUsers(){
